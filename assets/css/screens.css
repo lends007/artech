@@ -59,7 +59,13 @@
 }
 .auth-pills span svg { width: 12px; height: 12px; color: var(--ac); }
 
-.auth-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); font-size: 10.5px; color: var(--tx-dim); }
+.auth-foot {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: var(--sp-5); flex-wrap: wrap;
+  font-size: 10.5px; color: var(--tx-dim);
+  padding-top: var(--sp-5); border-top: 1px solid var(--line-soft);
+}
+.auth-by { min-width: 0; }
 .auth-foot .mono { letter-spacing: .06em; }
 
 /* --- Right: scanner --- */

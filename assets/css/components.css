@@ -536,3 +536,33 @@
   z-index: 60; box-shadow: var(--sh-2);
 }
 .tip:hover::after { opacity: 1; }
+
+/* ------------------------------------------------------------
+   MARCA ARTECH — logotipo aplicado como assinatura do fabricante
+   ------------------------------------------------------------ */
+.artech-logo { display: inline-flex; align-items: center; gap: 11px; }
+.artech-logo .al-mark { flex: none; display: flex; }
+.artech-logo .al-tx { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.artech-logo .al-name {
+  font-weight: 700; line-height: 1;
+  letter-spacing: .26em; text-indent: .26em;   /* compensa o tracking à direita */
+  color: var(--al-tx, var(--tx-hi));
+}
+.artech-logo .al-tag {
+  display: flex; align-items: center; gap: 7px;
+  line-height: 1; white-space: nowrap; overflow: hidden;
+  letter-spacing: .17em; text-transform: uppercase;
+  color: var(--al-sub, var(--tx-dim));
+}
+.artech-logo .al-tag i { flex: 0 1 13px; min-width: 0; height: 1px; background: var(--ac); opacity: .75; }
+
+/* assinatura compacta no rodapé do menu lateral */
+.nav-by {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 10px 2px;
+  color: var(--tx-dim);
+}
+.nav-by .nb-tx { font-size: 9px; letter-spacing: .17em; text-transform: uppercase; line-height: 1.3; }
+.nav-by .nb-tx b { display: block; color: var(--tx-mid); font-weight: 650; letter-spacing: .2em; }
+.nav-collapsed .nav-by { justify-content: center; padding: 9px 0 2px; }
+.nav-collapsed .nav-by .nb-tx { display: none; }

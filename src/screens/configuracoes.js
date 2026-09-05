@@ -6,6 +6,7 @@
 import { esc, dtFull, $ } from '../util.js';
 import { icon } from '../ui/icons.js';
 import { panel, levelTag, avatar } from '../ui/kit.js';
+import { artechLogo } from '../ui/brand.js';
 import { toast, confirm } from '../ui/overlay.js';
 import { state, me, myLevel, setUI, resetDemo, startSimulation } from '../store.js';
 import { UNITS, NIVEIS, NIVEL_LIST, PARAMS, unitName } from '../data/catalog.js';
@@ -170,7 +171,11 @@ export function render() {
 
         ${panel({
           title: 'Sobre',
-          body: `<div style="font-size:12px;color:var(--tx-lo);line-height:1.7">
+          body: `<div style="padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--line-soft)">
+            <div class="eyebrow" style="margin-bottom:11px">Desenvolvido por</div>
+            ${artechLogo({ size: 34 })}
+          </div>
+          <div style="font-size:12px;color:var(--tx-lo);line-height:1.7">
             <strong style="color:var(--tx-hi)">PET CONTROL</strong> — Gestão inteligente de Permissões de Entrada de Trabalho.<br>
             MVP demonstrativo v0.9 · protótipo funcional.<br><br>
             Escopo do protótipo: emissão digital da PET, validação assistida, identificação de pessoas,
