@@ -196,8 +196,9 @@ export function mount(root) {
       { label: 'Criada em', get: (p) => dtFull(p.criadaEm) },
       { label: 'Aprovação (min)', get: (p) => (p.validadaEm ? Math.round((p.validadaEm - p.criadaEm) / 60000) : '') },
       { label: 'Duração (h)', get: (p) => (p.iniciadaEm && p.encerradaEm ? ((p.encerradaEm - p.iniciadaEm) / 3600000).toFixed(1) : '') },
-    ]));
-    toast('Relatório exportado', `${r.pets.length} permissões em CSV.`, 'ok');
+    ])).then((ok) => {
+      if (ok) toast('Relatório exportado', `${r.pets.length} permissões em CSV.`, 'ok');
+    });
   });
 
   $('#rp-print', root)?.addEventListener('click', () => {

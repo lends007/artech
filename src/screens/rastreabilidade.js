@@ -248,8 +248,9 @@ export function mount(root, params = []) {
       { label: 'Onde', get: (e) => areaName(e.areaId) },
       { label: 'Unidade', get: (e) => unitName(e.unidade) },
       { label: 'PET', get: (e) => pet(e.petId)?.codigo ?? '' },
-    ]));
-    toast('Trilha exportada', `${rows.length} eventos exportados para auditoria.`, 'ok');
+    ])).then((ok) => {
+      if (ok) toast('Trilha exportada', `${rows.length} eventos exportados para auditoria.`, 'ok');
+    });
   });
 
   return null;

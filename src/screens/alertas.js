@@ -193,8 +193,9 @@ export function mount(root) {
       { label: 'PET', get: (a) => pet(a.petId)?.codigo ?? '' },
       { label: 'Status', get: (a) => a.status },
       { label: 'Tratado por', get: (a) => emp(a.resolvidoPorId)?.nome ?? '' },
-    ]));
-    toast('Exportação concluída', `${rows.length} alertas exportados.`, 'ok');
+    ])).then((ok) => {
+      if (ok) toast('Exportação concluída', `${rows.length} alertas exportados.`, 'ok');
+    });
   });
 
   return null;

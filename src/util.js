@@ -140,13 +140,50 @@ export function debounce(fn, ms = 220) {
   return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
 }
 
-export function downloadText(filename, text, mime = 'text/csv;charset=utf-8') {
-  const blob = new Blob(['﻿' + text], { type: mime });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename;
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1500);
+/**
+ * Entrega um arquivo ao usuário.
+ *
+ * Hospedado como página publicada, o visualizador não permite download por
+ * link comum — nesse caso usamos a capability `downloads`, que pede
+ * confirmação. Rodando localmente (servidor ou duplo clique), cai no
+ * método tradicional. Resolve `true` só quando o arquivo realmente saiu.
+ *
+ * @returns {Promise<boolean>}
+ */
+let _saveApi;   // undefined = ainda não consultado · null = indisponível
+async function saveApi() {
+  if (_saveApi !== undefined) return _saveApi;
+  try {
+    _saveApi = (typeof window !== 'undefined' && window.claude?.use)
+      ? await window.claude.use('downloads')
+      : null;
+  } catch { _saveApi = null; }
+  return _saveApi;
+}
+
+export async function downloadText(filename, text, mime = 'text/csv;charset=utf-8') {
+  const data = '\ufeff' + text;   // BOM: o Excel abre o CSV em UTF-8
+
+  const api = await saveApi();
+  if (api) {
+    try {
+      await api.save({ filename, data });
+      return true;
+    } catch (err) {
+      /* O usuário recusou ou o formato foi barrado: nada foi salvo. */
+      if (['declined', 'rejected_extension', 'extension_not_enabled', 'rate_limited', 'too_large'].includes(err?.code)) return false;
+      /* Qualquer outra falha: tenta o método local abaixo. */
+    }
+  }
+
+  try {
+    const url = URL.createObjectURL(new Blob([data], { type: mime }));
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+    return true;
+  } catch { return false; }
 }
 
 export function toCSV(rows, headers) {

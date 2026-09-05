@@ -171,8 +171,9 @@ export function mount(root) {
       { label: 'Limite mín.', get: (r) => PARAMS[r.s.param].min },
       { label: 'Limite máx.', get: (r) => PARAMS[r.s.param].max },
       { label: 'Situação', get: (r) => STATUS_MEDICAO[classify(r.s.param, r.d.v)].label },
-    ]));
-    toast('Exportação concluída', `${rows.length} leituras exportadas.`, 'ok');
+    ])).then((ok) => {
+      if (ok) toast('Exportação concluída', `${rows.length} leituras exportadas.`, 'ok');
+    });
   });
 
   const t = setInterval(() => {

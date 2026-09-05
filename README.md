@@ -38,9 +38,14 @@ auditoria consultável.
 
 ---
 
-## Como executar
+## Como abrir
 
-Não há build, dependências nem instalação. Basta servir a pasta:
+**Jeito mais simples — duplo clique.** O arquivo `dist/pet-control.html` é a
+plataforma inteira em um único arquivo (HTML, CSS e JavaScript embutidos).
+Abre direto no navegador, sem servidor e sem instalação.
+
+**A partir do código-fonte**, para desenvolver: não há build nem dependências,
+basta servir a pasta:
 
 ```bash
 python3 -m http.server 8000
@@ -48,8 +53,16 @@ python3 -m http.server 8000
 ```
 
 Qualquer servidor estático funciona (`npx serve`, `php -S`, Live Server…).
-É necessário servir por HTTP — abrir o `index.html` direto pelo `file://`
-bloqueia os módulos ES.
+Aqui o servidor é necessário: o `index.html` carrega módulos ES separados, que
+o navegador bloqueia no protocolo `file://`. Só a versão empacotada
+(`dist/pet-control.html`) abre com duplo clique.
+
+Para regerar o arquivo único depois de mexer no código:
+
+```bash
+python3 build.py              # dist/pet-control.html  (autônoma)
+python3 build.py --fragment   # dist/pet-control-fragmento.html  (para hospedar)
+```
 
 **Entrar na plataforma:** a tela inicial é a identificação facial. Selecione um
 dos quatro rostos cadastrados para simular o reconhecimento. Cada um tem um
@@ -114,7 +127,8 @@ a operação parece sempre atual.
 ### Estrutura
 
 ```
-index.html
+index.html         versão modular, para desenvolvimento
+build.py           empacota tudo em um arquivo único
 assets/css/
   tokens.css        design tokens (cores, tipografia, espaçamento, motion)
   base.css          reset, primitivas tipográficas, animações

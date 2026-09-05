@@ -301,8 +301,9 @@ export function mount(root) {
       { label: 'Resultado', get: (a) => a.resultado },
       { label: 'Confiança (%)', get: (a) => a.confianca },
       { label: 'Motivo', get: (a) => a.motivo },
-    ]));
-    toast('Exportação concluída', `${rows.length} registros de acesso exportados.`, 'ok');
+    ])).then((ok) => {
+      if (ok) toast('Exportação concluída', `${rows.length} registros de acesso exportados.`, 'ok');
+    });
   });
 
   return null;

@@ -416,8 +416,9 @@ export function mount(root) {
       { label: 'Situação', get: (e) => e.status },
       { label: 'Cadastro', get: (e) => dtFull(e.cadastradoEm) },
       { label: 'Último acesso', get: (e) => (e.ultimoAcesso ? dtFull(e.ultimoAcesso) : '') },
-    ]));
-    toast('Exportação concluída', `${rows.length} colaboradores exportados.`, 'ok');
+    ])).then((ok) => {
+      if (ok) toast('Exportação concluída', `${rows.length} colaboradores exportados.`, 'ok');
+    });
   });
 
   return null;

@@ -163,8 +163,9 @@ function mountList(root) {
       { label: 'Criada em', get: (p) => dtFull(p.criadaEm) },
       { label: 'Validada em', get: (p) => (p.validadaEm ? dtFull(p.validadaEm) : '') },
       { label: 'Encerrada em', get: (p) => (p.encerradaEm ? dtFull(p.encerradaEm) : '') },
-    ]));
-    toast('Exportação concluída', `${rows.length} permissões exportadas em CSV.`, 'ok');
+    ])).then((ok) => {
+      if (ok) toast('Exportação concluída', `${rows.length} permissões exportadas em CSV.`, 'ok');
+    });
   });
   return null;
 }
