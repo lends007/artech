@@ -5,6 +5,7 @@
 import { $, $$, esc, on, hhmmss, dayLabel, dur, ago } from './util.js';
 import { icon } from './ui/icons.js';
 import { avatar, levelTag } from './ui/kit.js';
+import { artechMark, artechLogo } from './ui/brand.js';
 import { toast, modal, drawer, close as closeOverlay } from './ui/overlay.js';
 import { state, subscribe, me, myLevel, allow, signOut, setUI, startSimulation, resolveAlert } from './store.js';
 import { alertasAbertos, kpis } from './selectors.js';
@@ -54,6 +55,10 @@ function shellHTML() {
             <div class="a">Monitoramento ativo</div>
             <div class="b" id="nav-sensors">— sensores</div>
           </div>
+        </div>
+        <div class="nav-by" title="ARTECH — Tecnologia que transforma">
+          ${artechMark(18)}
+          <span class="nb-tx">por <b>ARTECH</b></span>
         </div>
       </div>
     </nav>

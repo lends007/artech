@@ -2,7 +2,8 @@
 
 **Gestão inteligente de Permissões de Entrada de Trabalho**
 
-MVP funcional desenvolvido para o hackathon da CEI em parceria com o Itaipu Parquetec.
+MVP funcional desenvolvido pela **ARTECH** para o hackathon da CEI em parceria
+com o Itaipu Parquetec.
 
 ---
 
@@ -129,6 +130,7 @@ src/
     catalog.js      catálogos de domínio: unidades, atividades, riscos, EPIs, RBAC
     seed.js         geração determinística da base de demonstração
   ui/
+    brand.js        marca ARTECH (símbolo e logotipo em SVG vetorial)
     icons.js        conjunto de ícones
     kit.js          helpers de renderização compartilhados
     charts.js       gráficos SVG (área, barras, rosca, sparkline, radial)
@@ -157,6 +159,15 @@ significa na prática:
   tempo”. **Restaurar demonstração**, em Configurações, recria tudo.
 - **Todos os dados são fictícios.** Nomes, matrículas, unidades e áreas foram
   inventados para a demonstração e não correspondem a pessoas reais.
+
+### Marca
+
+O símbolo e o logotipo da ARTECH estão em `src/ui/brand.js` como SVG vetorial,
+recriados a partir da identidade original para escalar sem perda e assumir as
+cores corretas sobre o fundo escuro da interface. Aparecem na tela de
+identificação, no rodapé do menu lateral e em Configurações → Sobre.
+Para usar o arquivo original em vez da versão vetorial, coloque-o em
+`assets/brand/` e troque a chamada de `artechLogo()` por uma tag `<img>`.
 
 ### O que um piloto real exigiria
 

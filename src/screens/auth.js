@@ -11,6 +11,7 @@ import { $, el, esc, sleep, rnd } from '../util.js';
 import { icon } from '../ui/icons.js';
 import { attachFeed, meshSVG, releaseStream } from '../ui/camera.js';
 import { avatar, levelTag } from '../ui/kit.js';
+import { artechLogo } from '../ui/brand.js';
 import { state, signIn } from '../store.js';
 import { DEMO_FACES } from '../data/seed.js';
 import { unitName } from '../data/catalog.js';
@@ -50,8 +51,14 @@ export function renderAuth(onDone) {
       </div>
 
       <div class="auth-foot">
-        <span class="mono">PLATAFORMA v0.9 · MVP DEMONSTRATIVO</span>
-        <span class="row g-2">${icon('wifi', 12)} <span class="mono">Rede industrial · OK</span></span>
+        <div class="auth-by">
+          <div class="eyebrow" style="margin-bottom:9px">Uma solução</div>
+          ${artechLogo({ size: 34 })}
+        </div>
+        <div class="col g-2" style="align-items:flex-end">
+          <span class="mono">PLATAFORMA v0.9 · MVP DEMONSTRATIVO</span>
+          <span class="row g-2">${icon('wifi', 12)} <span class="mono">Rede industrial · OK</span></span>
+        </div>
       </div>
     </aside>
 
